@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,4 +15,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/contacto', function () {
+    return view('formulario_contacto');
+});
+
+Route::post('/contacto-exito', function (Request $request) {
+    //return 'Formulario recibido';
+    dd($request->all());
 });
