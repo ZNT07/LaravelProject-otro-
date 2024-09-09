@@ -1,7 +1,9 @@
 <?php
 
+use App\Models\Contacto; #Linea 29 usando Ctrl-Espacio para crear esto
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,5 +25,18 @@ Route::get('/contacto', function () {
 
 Route::post('/contacto-exito', function (Request $request) {
     //return 'Formulario recibido';
-    dd($request->all());
+    //dd($request->all(), $request->nombre);
+    $request->validate([
+        'nombre' => 'required|min:3|max:255',
+        'correo' => 'required|email',
+        'mensaje' => ['required', 'min:10']
+    ]);
+
+    $contacto = new Contacto(); #control-espacio
+    $contacto->nombre = $request->nombre;
+    $contacto->correo = $request->correo;
+    $contacto->mensaje = $request->mensaje;
+    $contacto->save();
+
+    return redirect('/contacto');
 });
