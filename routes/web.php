@@ -40,3 +40,7 @@ Route::post('/contacto-exito', function (Request $request) {
 
     return redirect('/contacto');
 });
+
+Route::get({
+    
+})

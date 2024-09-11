@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <h1>Formulario de Contacto</h1>
+    <h1>Formulario de Contacto {{ $tipo_persona}}</h1>
 
     @if ($errors->any())
     <div class="alert alert-danger">
@@ -22,6 +22,12 @@
 
     <form action="/contacto-exito" method="post">
         @csrf
+
+        @if ($tipo_persona == 'cliente')
+        <label for="no_cliente">Numero de cliente:</label><br>
+        <input type="text" name="no_cliente" id="no_cliente"><br>
+        @endif <!-- a partir de aqui, falta un buen de weas -->
+
         <div class="form_group">
             <label for="nombre">Nombre:</label>
             <hr>
