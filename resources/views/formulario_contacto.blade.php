@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Contacto</title>
 </head>
-
 <body>
     <h1>Formulario de Contacto {{ $tipo_persona}}</h1>
 
@@ -20,35 +19,32 @@
     </div>
     @endif
 
-    <form action="/contacto-exito" method="post">
+    <form action="/contacto-exito" method="POST">
         @csrf
 
         @if ($tipo_persona == 'cliente')
-        <label for="no_cliente">Numero de cliente:</label><br>
-        <input type="text" name="no_cliente" id="no_cliente"><br>
+            <label for="no_cliente">Numero de cliente:</label><br>
+            <input type="text" name="no_cliente" id="no_cliente"><br>
         @endif <!-- a partir de aqui, falta un buen de weas -->
 
-        <div class="form_group">
-            <label for="nombre">Nombre:</label>
-            <hr>
-            <input type="text" id="nombre" name="nombre" value="{{ old('nombre') }}" required> <!-- value son para conservar lo escrito-->
-            <hr>
-        </div>
-        <div class="form_group">
-            <label for="correo">Correo:</label>
-            <hr>
-            <input type="email" id="correo" name="correo" value="{{ old('correo') }}" required>
-            <hr>
-        </div>
-        <div class="form_group">
-            <label for="mensaje">Mensaje:</label>
-            <hr>
-            <textarea name="mensaje" id="mensaje" cols="30" rows="10">{{ old('mensaje') }}</textarea> <!--no puede haber value en un textarea-->
-            <hr>
-        </div>
+        <label for="nombre">Nombre:</label>
+        <input type="text" name="nombre" value="{{ old('nombre') }}"><br>
+        @error('nombre')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+        
+        <label for="correo">Correo:</label>
+        <input type="email" name="correo" value="{{ old('correo') }}"><br>
+        @error('correo')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+
+        <label for="mensaje">Mensaje:</label><br>
+        <textarea name="mensaje" cols="30" rows="4">{{ old('mensaje') }}</textarea><br>
+        @error('mensaje')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         <input type="submit" value="Enviar">
-        <hr>
     </form>
 </body>
-
 </html>
