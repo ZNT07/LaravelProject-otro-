@@ -12,7 +12,8 @@ class NoticiaController extends Controller
      */
     public function index()
     {
-        //
+        $noticias = Noticia::all();
+        return view('noticias.index-noticias', compact('noticias'));
     }
 
     /**
@@ -20,7 +21,7 @@ class NoticiaController extends Controller
      */
     public function create()
     {
-        return view('noticias/create-noticia');
+        return view('noticias.create-noticia');
     }
 
     /**
@@ -38,7 +39,7 @@ class NoticiaController extends Controller
      */
     public function show(Noticia $noticia)
     {
-        //
+        return view('noticias.show-noticia', compact('noticia'));
     }
 
     /**
@@ -46,7 +47,7 @@ class NoticiaController extends Controller
      */
     public function edit(Noticia $noticia)
     {
-        return view('noticias.edit-noticia', compact());
+        return view('noticias.edit-noticia', compact('noticia'));
     }
 
     /**
@@ -54,7 +55,7 @@ class NoticiaController extends Controller
      */
     public function update(Request $request, Noticia $noticia)
     {
-        $noticia->tiupdate($request->all());
+        $noticia->update($request->all());
         return redirect()->route('noticia.show', $noticia);
     }
 
